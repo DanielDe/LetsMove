@@ -64,8 +64,6 @@ static void Relaunch(NSString *destinationPath);
 
 // Main worker function
 void PFMoveToApplicationsFolderIfNecessary(void) {
-	NSLog(@"running move to app folder...");
-
 	// Make sure to do our work on the main thread.
 	// Apparently Electron apps need this for things to work properly.
 	if (![NSThread isMainThread]) {
@@ -76,7 +74,7 @@ void PFMoveToApplicationsFolderIfNecessary(void) {
 	}
 	
 	// Skip if user suppressed the alert before
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:AlertSuppressKey]) return;
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:AlertSuppressKey] && false) return;
 
 	// Path of the bundle
 	NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
@@ -86,7 +84,7 @@ void PFMoveToApplicationsFolderIfNecessary(void) {
 
 	// Skip if the application is already in some Applications folder,
 	// unless it's inside another app's bundle.
-	if (IsInApplicationsFolder(bundlePath) && !isNestedApplication) return;
+	if (IsInApplicationsFolder(bundlePath) && !isNestedApplication && false) return;
 
 	// OK, looks like we'll need to do a move - set the status variable appropriately
 	MoveInProgress = YES;
