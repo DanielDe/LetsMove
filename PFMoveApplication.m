@@ -64,6 +64,7 @@ static void Relaunch(NSString *destinationPath);
 
 // Main worker function
 void PFMoveToApplicationsFolderIfNecessary(void) {
+	NSLog(@"running move to app folder...");
 
 	// Make sure to do our work on the main thread.
 	// Apparently Electron apps need this for things to work properly.
