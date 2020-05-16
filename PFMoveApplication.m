@@ -74,7 +74,7 @@ void PFMoveToApplicationsFolderIfNecessary(void) {
 	}
 
 	// Skip if user suppressed the alert before
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:AlertSuppressKey] && false) return;
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:AlertSuppressKey]) return;
 
 	// Path of the bundle
 	NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
@@ -84,7 +84,7 @@ void PFMoveToApplicationsFolderIfNecessary(void) {
 
 	// Skip if the application is already in some Applications folder,
 	// unless it's inside another app's bundle.
-	if (IsInApplicationsFolder(bundlePath) && !isNestedApplication && false) return;
+	if (IsInApplicationsFolder(bundlePath) && !isNestedApplication) return;
 
 	// OK, looks like we'll need to do a move - set the status variable appropriately
 	MoveInProgress = YES;
