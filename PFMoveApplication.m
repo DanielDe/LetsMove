@@ -72,7 +72,7 @@ void PFMoveToApplicationsFolderIfNecessary(void) {
 		});
 		return;
 	}
-	
+
 	// Skip if user suppressed the alert before
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:AlertSuppressKey] && false) return;
 
@@ -88,7 +88,7 @@ void PFMoveToApplicationsFolderIfNecessary(void) {
 
 	// OK, looks like we'll need to do a move - set the status variable appropriately
 	MoveInProgress = YES;
-	
+
 	// File Manager
 	NSFileManager *fm = [NSFileManager defaultManager];
 
@@ -131,18 +131,8 @@ void PFMoveToApplicationsFolderIfNecessary(void) {
 		// Add accept button
 		[alert addButtonWithTitle:kStrMoveApplicationButtonMove];
 
-		// Add deny button
-		NSButton *cancelButton = [alert addButtonWithTitle:kStrMoveApplicationButtonDoNotMove];
-		[cancelButton setKeyEquivalent:[NSString stringWithFormat:@"%C", 0x1b]]; // Escape key
-
 		// Setup suppression button
-		[alert setShowsSuppressionButton:YES];
-
-		if (PFUseSmallAlertSuppressCheckbox) {
-			NSCell *cell = [[alert suppressionButton] cell];
-			[cell setControlSize:NSSmallControlSize];
-			[cell setFont:[NSFont systemFontOfSize:[NSFont smallSystemFontSize]]];
-		}
+		[alert setShowsSuppressionButton:NO];
 	}
 
 	// Activate app -- work-around for focus issues related to "scary file from internet" OS dialog.
@@ -377,7 +367,7 @@ static BOOL Trash(NSString *path) {
 																 tag:NULL];
 	}
 #endif
-	
+
 	// As a last resort try trashing with AppleScript.
 	// This allows us to trash the app in macOS Sierra even when the app is running inside
 	// an app translocation image.
@@ -413,7 +403,7 @@ static BOOL DeleteOrTrash(NSString *path) {
 		// Don't log warning if on Sierra and running inside App Translocation path
 		if ([path rangeOfString:@"/AppTranslocation/"].location == NSNotFound)
 			NSLog(@"WARNING -- Could not delete '%@': %@", path, [error localizedDescription]);
-		
+
 		return Trash(path);
 	}
 }
