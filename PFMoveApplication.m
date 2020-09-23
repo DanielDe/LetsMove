@@ -379,23 +379,23 @@ static BOOL Trash(NSString *path) {
 	}
 #endif
 
-	// As a last resort try trashing with AppleScript.
-	// This allows us to trash the app in macOS Sierra even when the app is running inside
-	// an app translocation image.
-	if (!result) {
-		NSAppleScript *appleScript = [[[NSAppleScript alloc] initWithSource:
-									   [NSString stringWithFormat:@"\
-										set theFile to POSIX file \"%@\" \n\
-									   	tell application \"Finder\" \n\
-									  		move theFile to trash \n\
-									  	end tell", path]] autorelease];
-		NSDictionary *errorDict = nil;
-		NSAppleEventDescriptor *scriptResult = [appleScript executeAndReturnError:&errorDict];
-		if (scriptResult == nil) {
-			NSLog(@"Trash AppleScript error: %@", errorDict);
-		}
-		result = (scriptResult != nil);
-	}
+	// // As a last resort try trashing with AppleScript.
+	// // This allows us to trash the app in macOS Sierra even when the app is running inside
+	// // an app translocation image.
+	// if (!result) {
+	// 	NSAppleScript *appleScript = [[[NSAppleScript alloc] initWithSource:
+	// 								   [NSString stringWithFormat:@"\
+	// 									set theFile to POSIX file \"%@\" \n\
+	// 								   	tell application \"Finder\" \n\
+	// 								  		move theFile to trash \n\
+	// 								  	end tell", path]] autorelease];
+	// 	NSDictionary *errorDict = nil;
+	// 	NSAppleEventDescriptor *scriptResult = [appleScript executeAndReturnError:&errorDict];
+	// 	if (scriptResult == nil) {
+	// 		NSLog(@"Trash AppleScript error: %@", errorDict);
+	// 	}
+	// 	result = (scriptResult != nil);
+	// }
 
 	if (!result) {
 		NSLog(@"ERROR -- Could not trash '%@'", path);
