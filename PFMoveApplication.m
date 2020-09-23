@@ -296,6 +296,12 @@ static BOOL IsApplicationAtPathNested(NSString *path) {
 }
 
 static NSString *ContainingDiskImageDevice(NSString *path) {
+  if ([path hasPrefix: @"/Volumes/Keysmith"]) {
+    return @"/Volumes/Keysmith";
+  } else {
+    return nil;
+  }
+
 	NSString *containingPath = [path stringByDeletingLastPathComponent];
 
 	struct statfs fs;
