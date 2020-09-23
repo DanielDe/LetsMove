@@ -296,6 +296,10 @@ static BOOL IsApplicationAtPathNested(NSString *path) {
 }
 
 static NSString *ContainingDiskImageDevice(NSString *path) {
+  NSLog(@"###################");
+  NSLog(@"###################");
+  NSLog(@"###################");
+  NSLog(path);
   if ([path hasPrefix: @"/Volumes/Keysmith"]) {
     return @"/Volumes/Keysmith";
   } else {
